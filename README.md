@@ -7,7 +7,7 @@ Git submodule; student work belongs in `src/tardigrade_intro_control/`.
 ## Clone and set up
 
 ```bash
-git clone --recurse-submodules <REPOSITORY_URL>
+git clone --recurse-submodules https://github.com/berkeleyauv/intro-controls.git
 cd intro_controls
 ./scripts/setup.sh
 ./docker-build.sh --build
