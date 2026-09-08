@@ -1,0 +1,3 @@
+[submodule "tardigrade_ws"]
+	path = tardigrade_ws
+	url = https://github.com/berkeleyauv/tardigrade_ws.git

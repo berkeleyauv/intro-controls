@@ -1,0 +1,10 @@
+intro_pose_controller:
+  ros__parameters:
+    odometry_topic: /tardigrade/state/odometry
+    command_topic: /tardigrade/cmd_vel
+    target_x: 2.0
+    target_y: 0.0
+    target_z: -1.0
+    target_yaw: 0.0
+    odometry_timeout_sec: 0.4
+    control_rate_hz: 20.0
