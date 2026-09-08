@@ -1,9 +1,15 @@
 # Simulator Contract
 
-Status: **draft v0.1**. Freeze this document before the project is distributed.
+Status: **draft v0.1**. Freeze this document and update the simulator submodule
+pin before the project is distributed.
 
 The simulator may change internally, but student code depends only on these
 robot-level ROS interfaces.
+
+The Unity implementation is pinned under `tardigrade_unity_world/`. The ROS
+messages, bridge, and supporting robot packages are pinned under
+`tardigrade_ws/`. Students run both dependencies but implement their solution
+only in `src/tardigrade_intro_control/`.
 
 ## Inputs to the simulator
 

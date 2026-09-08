@@ -9,7 +9,8 @@ from reconstructing the repository setup.
 
 ## What is provided
 
-- The production Tardigrade workspace as a pinned submodule.
+- The production Tardigrade workspace as a pinned, read-only submodule.
+- The production Unity simulator as a pinned, read-only submodule.
 - A ROS 2 Python package that builds in the same workspace.
 - Pure controller and mission-logic modules that can be unit tested without a
   running ROS graph.
@@ -23,6 +24,7 @@ from reconstructing the repository setup.
 ### 1. ROS graph and baseline
 
 - Build and launch the package.
+- Start the ROS TCP endpoint and connect the pinned Unity simulator.
 - Identify every topic type and coordinate frame used by the controller.
 - Record a baseline response and explain it using plots.
 - Confirm stale odometry and a missing enable heartbeat produce zero output.
