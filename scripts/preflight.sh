@@ -57,9 +57,26 @@ for dependency in tardigrade_ws tardigrade_unity_world; do
   fi
 done
 
-if git submodule status >/dev/null 2>&1; then
+if submodule_status="$(git submodule status --recursive 2>/dev/null)"; then
   echo "Pinned revisions:"
-  git submodule status
+  echo "$submodule_status"
+  while IFS= read -r line; do
+    case "${line:0:1}" in
+      -)
+        echo "missing: submodule is not initialized (run ./scripts/setup.sh)"
+        failed=true
+        ;;
+      +)
+        echo "mismatch: submodule is not at the revision pinned by this project"
+        echo "Run ./scripts/setup.sh after saving any work inside submodules."
+        failed=true
+        ;;
+      U)
+        echo "conflict: submodule revision has unresolved merge conflicts"
+        failed=true
+        ;;
+    esac
+  done <<< "$submodule_status"
 else
   echo "unable to inspect submodule revisions"
   failed=true

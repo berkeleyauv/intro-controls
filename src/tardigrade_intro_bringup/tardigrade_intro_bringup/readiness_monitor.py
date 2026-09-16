@@ -1,4 +1,4 @@
-"""Publish a transparent, non-mutating readiness summary for Unity SIL."""
+"""Publish a non-mutating readiness summary for the provided Unity stack."""
 
 import json
 import time
@@ -83,9 +83,7 @@ class ReadinessMonitor(Node):
             for name, received in self._received.items()
         }
         discovered = {name for name, _ in self.get_service_names_and_types()}
-        services = {
-            name: name in discovered for name in REQUIRED_SERVICES
-        }
+        services = {name: name in discovered for name in REQUIRED_SERVICES}
         ready = (
             all(streams.values())
             and all(services.values())

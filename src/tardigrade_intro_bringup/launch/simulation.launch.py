@@ -1,4 +1,4 @@
-"""Start Unity transport, production SIL control, Foxglove, and readiness."""
+"""Start Unity transport, state estimation, control, and Foxglove transport."""
 
 import os
 
@@ -34,7 +34,7 @@ def generate_launch_description():
             }.items(),
         ),
         Node(
-            package="tardigrade_intro_control",
+            package="tardigrade_intro_bringup",
             executable="readiness_monitor",
             name="readiness_monitor",
             output="screen",
