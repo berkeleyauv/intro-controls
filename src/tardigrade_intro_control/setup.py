@@ -24,11 +24,18 @@ setup(
     maintainer="Berkeley AUV",
     maintainer_email="software@berkeleyauv.org",
     description="Simulation-only controls onboarding project.",
-    license="TODO",
+    license="Apache-2.0",
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            "pose_controller = tardigrade_intro_control.pose_controller:main",
+            (
+                "move_to_pose_server = "
+                "tardigrade_intro_control.move_to_pose_server:main"
+            ),
+            (
+                "readiness_monitor = "
+                "tardigrade_intro_control.readiness_monitor:main"
+            ),
         ],
     },
 )

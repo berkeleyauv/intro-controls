@@ -12,6 +12,18 @@ def wrap_angle(value):
     return math.atan2(math.sin(value), math.cos(value))
 
 
+def yaw_from_quaternion(x, y, z, w):
+    """Return yaw after validating and normalizing quaternion components."""
+    values = (x, y, z, w)
+    if not all(math.isfinite(value) for value in values):
+        raise ValueError("quaternion values must be finite")
+    norm = math.sqrt(sum(value * value for value in values))
+    if norm < 1e-9:
+        raise ValueError("quaternion must be non-zero")
+    x, y, z, w = (value / norm for value in values)
+    return math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+
+
 def world_error_to_body(error_x, error_y, yaw):
     """Rotate a planar error from odom coordinates into base_link."""
     cosine = math.cos(yaw)
@@ -53,18 +65,18 @@ class BodyCommand:
 
 
 def compute_pose_command(current, target, gains=ControllerGains()):
-    """Conservative proportional pose controller.
+    """Intentionally weak, runnable controller baseline.
 
-    This is a runnable baseline. Students should characterize it before adding
-    derivative/integral terms, approach shaping, or disturbance rejection.
+    It only handles motion along the odometry X axis. That proves the ROS and
+    simulator plumbing, but cannot reach the project target. Students extend
+    this pure function to control body-frame forward/left, depth, and yaw while
+    preserving the safety limits below. The ROS wrapper owns action lifecycle
+    and watchdog behavior; keep that separation when completing the project.
     """
     error_x = target.x - current.x
     error_y = target.y - current.y
     error_z = target.z - current.z
     yaw_error = wrap_angle(target.yaw - current.yaw)
-    forward_error, left_error = world_error_to_body(
-        error_x, error_y, current.yaw
-    )
     reached = (
         math.hypot(error_x, error_y) <= gains.position_tolerance
         and abs(error_z) <= gains.depth_tolerance
@@ -73,9 +85,9 @@ def compute_pose_command(current, target, gains=ControllerGains()):
     if reached:
         return BodyCommand(reached=True)
     return BodyCommand(
-        forward=clamp(gains.position_kp * forward_error, gains.max_linear),
-        left=clamp(gains.position_kp * left_error, gains.max_linear),
-        up=clamp(gains.depth_kp * error_z, gains.max_vertical),
-        yaw=clamp(gains.yaw_kp * yaw_error, gains.max_yaw),
+        # TODO(project): rotate planar error into base_link, control every axis,
+        # and implement the required resettable yaw PID state outside this pure
+        # P-controller baseline.
+        forward=clamp(gains.position_kp * error_x, gains.max_linear),
         reached=False,
     )

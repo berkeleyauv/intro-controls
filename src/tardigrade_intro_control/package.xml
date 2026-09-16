@@ -5,13 +5,21 @@
   <version>0.1.0</version>
   <description>Simulation-only Berkeley AUV controls onboarding project.</description>
   <maintainer email="software@berkeleyauv.org">Berkeley AUV</maintainer>
-  <license>TODO</license>
+  <license>Apache-2.0</license>
 
+  <depend>builtin_interfaces</depend>
   <depend>geometry_msgs</depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
   <depend>nav_msgs</depend>
   <depend>rclpy</depend>
+  <depend>rosgraph_msgs</depend>
   <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
   <depend>tardigrade_interfaces</depend>
+  <depend>tardigrade_intro_interfaces</depend>
+  <exec_depend>tardigrade_bringup</exec_depend>
 
   <test_depend>python3-pytest</test_depend>
 

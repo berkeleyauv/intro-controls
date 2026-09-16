@@ -4,3 +4,4 @@
 [submodule "tardigrade_unity_world"]
 	path = tardigrade_unity_world
 	url = https://github.com/berkeleyauv/tardigrade_unity_world.git
+	ignore = dirty

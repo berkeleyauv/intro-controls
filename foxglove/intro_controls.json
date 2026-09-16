@@ -1,0 +1,72 @@
+{
+  "configById": {
+    "tardigrade-tools.PID Tuner!pid": {
+      "axis": "surge"
+    },
+    "tardigrade-tools.Vehicle Status!status": {},
+    "tardigrade-tools.Attitude!attitude": {},
+    "Plot!position-error": {
+      "title": "MoveToPose position error (m)",
+      "paths": [
+        {
+          "value": "/tardigrade/intro/move_to_pose/_action/feedback.feedback.position_error",
+          "label": "position error",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "showLegend": false,
+      "legendDisplay": "top",
+      "xAxisVal": "timestamp"
+    },
+    "Plot!yaw-error": {
+      "title": "MoveToPose yaw error (rad)",
+      "paths": [
+        {
+          "value": "/tardigrade/intro/move_to_pose/_action/feedback.feedback.yaw_error",
+          "label": "yaw error",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "showLegend": false,
+      "legendDisplay": "top",
+      "xAxisVal": "timestamp"
+    },
+    "RawMessages!readiness": {
+      "defaultExpanded": true,
+      "topicPath": "/tardigrade/intro/readiness"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": "tardigrade-tools.PID Tuner!pid",
+    "second": {
+      "direction": "column",
+      "first": {
+        "direction": "row",
+        "first": "tardigrade-tools.Vehicle Status!status",
+        "second": "tardigrade-tools.Attitude!attitude",
+        "splitPercentage": 50
+      },
+      "second": {
+        "direction": "row",
+        "first": {
+          "direction": "column",
+          "first": "Plot!position-error",
+          "second": "Plot!yaw-error",
+          "splitPercentage": 50
+        },
+        "second": "RawMessages!readiness",
+        "splitPercentage": 68
+      },
+      "splitPercentage": 52
+    },
+    "splitPercentage": 62
+  }
+}

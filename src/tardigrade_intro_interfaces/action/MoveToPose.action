@@ -1,0 +1,15 @@
+# Goal: an absolute target in the odom frame and a bounded wall-time budget.
+geometry_msgs/PoseStamped target
+builtin_interfaces/Duration timeout
+---
+# Result: why execution ended and the last measured errors.
+bool success
+string message
+float64 final_position_error
+float64 final_yaw_error
+---
+# Feedback: enough state for a CLI client, Foxglove, or another ROS node.
+geometry_msgs/Point current_position
+float64 position_error
+float64 yaw_error
+string controller_state

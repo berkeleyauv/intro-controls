@@ -1,0 +1,104 @@
+{
+  "configById": {
+    "RawMessages!status": {
+      "defaultExpanded": true,
+      "topicPath": "/tardigrade/status"
+    },
+    "RawMessages!readiness": {
+      "defaultExpanded": true,
+      "topicPath": "/tardigrade/intro/readiness"
+    },
+    "Plot!position": {
+      "title": "Filtered ENU position (m)",
+      "paths": [
+        {
+          "value": "/tardigrade/state/odometry/filtered.pose.pose.position.x",
+          "label": "x",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/tardigrade/state/odometry/filtered.pose.pose.position.y",
+          "label": "y",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/tardigrade/state/odometry/filtered.pose.pose.position.z",
+          "label": "z",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "showLegend": true,
+      "legendDisplay": "top",
+      "xAxisVal": "timestamp"
+    },
+    "Plot!action-errors": {
+      "title": "MoveToPose errors",
+      "paths": [
+        {
+          "value": "/tardigrade/intro/move_to_pose/_action/feedback.feedback.position_error",
+          "label": "position (m)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/tardigrade/intro/move_to_pose/_action/feedback.feedback.yaw_error",
+          "label": "yaw (rad)",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "showLegend": true,
+      "legendDisplay": "top",
+      "xAxisVal": "timestamp"
+    },
+    "Plot!surge-pid": {
+      "title": "Surge PID: setpoint and measurement (m/s)",
+      "paths": [
+        {
+          "value": "/tardigrade/control/surge/debug.setpoint",
+          "label": "setpoint",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        },
+        {
+          "value": "/tardigrade/control/surge/debug.measurement",
+          "label": "measurement",
+          "enabled": true,
+          "timestampMethod": "receiveTime"
+        }
+      ],
+      "showLegend": true,
+      "legendDisplay": "top",
+      "xAxisVal": "timestamp"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": {
+      "direction": "column",
+      "first": "RawMessages!status",
+      "second": "RawMessages!readiness",
+      "splitPercentage": 50
+    },
+    "second": {
+      "direction": "column",
+      "first": {
+        "direction": "row",
+        "first": "Plot!position",
+        "second": "Plot!action-errors",
+        "splitPercentage": 50
+      },
+      "second": "Plot!surge-pid",
+      "splitPercentage": 62
+    },
+    "splitPercentage": 30
+  }
+}

@@ -14,8 +14,8 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package="tardigrade_intro_control",
-            executable="pose_controller",
-            name="intro_pose_controller",
+            executable="move_to_pose_server",
+            name="move_to_pose_server",
             output="screen",
             parameters=[config],
         ),
